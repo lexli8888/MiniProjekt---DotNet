@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using AutoReservation.Dal.Entities;
+using AutoReservation.BusinessLayer.Exceptions;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -48,6 +50,18 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        
+        public bool IsCarAvailable(Reservation reservation, Auto auto)
+        {
+            // check if Reservation is not equal with auto range
+            return true;
+        }
+
+        public AutoUnavailableException<Auto> CreateAutoUnavailableException(Reservation reservation, Auto auto)
+        {
+            return new AutoUnavailableException<Auto>("Das Auto ist für diesen Zeitraum nicht verfügbar.");
+        }
+
+
+
     }
 }

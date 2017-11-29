@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AutoReservation.BusinessLayer.Exceptions
 {
-    public class InvalidDateRangeException<Reservation> : Exception
+    public class AutoUnavailableException<Auto> : Exception
     {
-        public InvalidDateRangeException(string message) {
-            Console.WriteLine(message);
-        }
+        public AutoUnavailableException(string message) : base(message) { }
+
     }
+
 }

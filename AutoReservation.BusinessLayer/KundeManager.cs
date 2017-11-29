@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using AutoReservation.Dal.Entities;
 
 namespace AutoReservation.BusinessLayer
 {
