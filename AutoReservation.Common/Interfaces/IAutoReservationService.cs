@@ -20,7 +20,7 @@ namespace AutoReservation.Common.Interfaces
         void removeCar(AutoDto autoDto);
         void removeCustomer(KundeDto kundeDto);
         void removeRerservation(ReservationDto reservationDto);
-        void isCarAvailable(AutoDto auto);
+        bool isCarAvailable(ReservationDto reservation, AutoDto auto);
 
     }
 }

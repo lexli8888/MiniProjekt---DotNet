@@ -39,7 +39,7 @@ namespace AutoReservation.BusinessLayer
             context.SaveChanges();
         }
 
-        public void updateCar(Auto auto) {
+        public void modifyCar(Auto auto) {
             try
             {
                 context.Entry(auto).State = EntityState.Modified;
@@ -50,11 +50,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool IsCarAvailable(Reservation reservation, Auto auto)
-        {
-            // check if Reservation is not equal with auto range
-            return true;
-        }
+       
 
         public AutoUnavailableException<Auto> CreateAutoUnavailableException(Reservation reservation, Auto auto)
         {

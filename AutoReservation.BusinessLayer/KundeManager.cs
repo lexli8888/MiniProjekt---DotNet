@@ -41,7 +41,7 @@ namespace AutoReservation.BusinessLayer
         }
 
 
-        public void updateCustomer(Kunde kunde) {
+        public void modifyCustomer(Kunde kunde) {
             try
             {
                 context.Entry(kunde).State = EntityState.Modified;

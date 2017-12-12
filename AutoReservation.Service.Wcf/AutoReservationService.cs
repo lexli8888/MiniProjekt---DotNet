@@ -37,17 +37,20 @@ namespace AutoReservation.Service.Wcf
 
         public List<AutoDto> getAllCars()
         {
-            throw new NotImplementedException();
+            AutoManager autoManager = new AutoManager();
+            return DtoConverter.ConvertToDtos(autoManager.List);
         }
 
         public List<KundeDto> getAllCustomers()
         {
-            throw new NotImplementedException();
+            KundeManager kundeManager = new KundeManager();
+            return DtoConverter.ConvertToDtos(kundeManager.List);
         }
 
         public List<ReservationDto> getAllReservations()
         {
-            throw new NotImplementedException();
+            ReservationManager reservationManager = new ReservationManager();
+            return DtoConverter.ConvertToDtos(reservationManager.List);
         }
 
         public AutoDto getCarById(int id)
@@ -68,9 +71,10 @@ namespace AutoReservation.Service.Wcf
             return DtoConverter.ConvertToDto(reservationManager.getReservationByNr(nr));
         }
 
-        public void isCarAvailable(AutoDto auto)
+        public bool isCarAvailable(ReservationDto reservation, AutoDto auto)
         {
-            AutoManager autoManager = new AutoManager();
+            ReservationManager reservationManager = new ReservationManager();
+            return reservationManager.IsCarAvailable(DtoConverter.ConvertToEntity(reservation), DtoConverter.ConvertToEntity(auto));
             
         }
 
@@ -78,21 +82,21 @@ namespace AutoReservation.Service.Wcf
         {
             Auto auto = DtoConverter.ConvertToEntity(autoDto);
             AutoManager autoManager = new AutoManager();
-            autoManager.updateCar(auto);
+            autoManager.modifyCar(auto);
         }
 
         public void modifyCustomer(KundeDto kundeDto)
         {
             Kunde kunde = DtoConverter.ConvertToEntity(kundeDto);
             KundeManager kundeManager = new KundeManager();
-            kundeManager.updateCustomer(kunde);
+            kundeManager.modifyCustomer(kunde);
         }
 
         public void modifyRerservation(ReservationDto reservationDto)
         {
             Reservation reservation = DtoConverter.ConvertToEntity(reservationDto);
             ReservationManager reservationManager = new ReservationManager();
-            reservationManager.updateReservation(reservation);
+            reservationManager.modifyReservation(reservation);
         }
 
         public void removeCar(AutoDto autoDto)

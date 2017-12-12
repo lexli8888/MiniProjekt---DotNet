@@ -42,7 +42,7 @@ namespace AutoReservation.BusinessLayer
             context.SaveChanges();
         }
 
-        public void updateReservation(Reservation reservation) {
+        public void modifyReservation(Reservation reservation) {
             try
             {
                 context.Entry(reservation).State = EntityState.Modified;
@@ -62,6 +62,12 @@ namespace AutoReservation.BusinessLayer
             return true;
         }
 
+        public bool IsCarAvailable(Reservation reservation, Auto auto)
+        {
+            // check if Reservation is not equal with auto range
+            return context.Reservations.Where(x => x.Auto == auto && x.Bis < reservation.Von && x.Von < reservation.Bis) == null ? false : true;
+            
+        }
 
         protected static InvalidDateRangeException<Reservation> CreateInvalidDateRangeException<Reservation> (Reservation reservation)
            
