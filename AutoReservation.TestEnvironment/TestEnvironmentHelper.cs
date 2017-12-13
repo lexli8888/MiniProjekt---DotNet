@@ -63,7 +63,7 @@ namespace AutoReservation.TestEnvironment
                     // Insert test data
                     context.Autos.AddRange(Autos);
                     context.Kunden.AddRange(Kunden);
-                    context.Reservationen.AddRange(Reservationen);
+                    context.Reservations.AddRange(Reservationen);
                     context.SaveChanges();
                 }
                 catch (Exception ex)
