@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoReservation.Dal
+namespace AutoReservation.Dal.Entities
 {
-    class LuxusklasseAuto : Auto
+    public class LuxusklasseAuto : Auto
     {
         new public int Basistarif {get; set;}
     }

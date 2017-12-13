@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoReservation.Dal
+namespace AutoReservation.Dal.Entities
 {
-    class MittelklasseAuto : Auto
+    public class MittelklasseAuto : Auto
     {
 
     }
