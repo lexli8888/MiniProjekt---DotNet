@@ -6,13 +6,14 @@ namespace AutoReservation.Dal.Entities
 {
     public class Reservation
     {
-        public object RowVersion;
-
+        public DateTime RowVersion;
+        
         public int AutoId { get; set; }
         public int KundeId { get; set; }
         public DateTime Von { get; set; }
         public DateTime Bis { get; set; }
 
+        [Key]
         public int ReservationsNr { get; set; }
 
         public Auto Auto { get; set; }

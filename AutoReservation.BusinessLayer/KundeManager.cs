@@ -24,7 +24,7 @@ namespace AutoReservation.BusinessLayer
         public Kunde getCustomerById(int id)
         {
 
-            return (Kunde)context.Kunden.Where(x => x.Id == id);
+            return context.Kunden.Where(x => x.Id == id).FirstOrDefault();
 
         }
 

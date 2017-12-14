@@ -24,9 +24,7 @@ namespace AutoReservation.BusinessLayer
         }
 
         public Auto getCarById(int id) {
-            
-                return (Auto) context.Autos.Where(x => x.Id == id);
-            
+                return context.Autos.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void addCar(Auto auto) {

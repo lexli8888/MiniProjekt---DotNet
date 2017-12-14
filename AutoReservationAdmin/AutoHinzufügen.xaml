@@ -31,7 +31,7 @@
         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="20">Tagestarif:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Basistarif:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" FontSize="20">Autoklasse:</TextBlock>
-        <Button Grid.Column="1" Grid.Row="5" Margin="25" FontSize="20">Zurück zur Übersicht</Button>
+        <Button Grid.Column="1" Grid.Row="5" Margin="25" FontSize="20" Click="Button_Back">Zurück zur Übersicht</Button>
         <Button Grid.Column="3" Grid.Row="5" Margin="25" FontSize="20">Auto Hinzufügen</Button>
 
     </Grid>

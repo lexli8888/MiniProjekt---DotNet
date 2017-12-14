@@ -26,7 +26,7 @@ namespace AutoReservation.BusinessLayer
         public Reservation getReservationByNr(int nr)
         {
 
-            return (Reservation)context.Reservations.Where(x => x.ReservationsNr == nr);
+            return context.Reservations.Where(x => x.ReservationsNr == nr).FirstOrDefault();
 
         }
 

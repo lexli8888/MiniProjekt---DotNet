@@ -23,5 +23,12 @@ namespace AutoReservationAdmin
         {
             InitializeComponent();
         }
+
+        private void Button_Back(object sender, RoutedEventArgs e)
+        {
+            Window Kunden = new Kunden();
+            Kunden.Show();
+            this.Close();
+        }
     }
 }

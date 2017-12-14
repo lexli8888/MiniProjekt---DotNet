@@ -7,7 +7,7 @@ namespace AutoReservation.Common.DataTransferObjects
 {
     public class ReservationDto
     {
-        public object RowVersion;
+        public DateTime RowVersion;
 
         public int ReservationsNr { get; set; }
         public DateTime Von { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoReservation.Common.DataTransferObjects;
+using System;
 using System.ServiceModel;
 
 namespace AutoReservation.Service.Wcf.Host
@@ -14,6 +15,7 @@ namespace AutoReservation.Service.Wcf.Host
 
             // Open ServiceHost
             host.Open();
+            
 
             Console.WriteLine("AutoReservationService started.");
             Console.WriteLine();

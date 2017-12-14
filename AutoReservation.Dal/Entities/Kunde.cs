@@ -8,13 +8,13 @@ namespace AutoReservation.Dal.Entities
 {
     public class Kunde
     {
-        public DateTime Geburtsdatum;
         public DateTime RowVersion;
 
         public string Nachname { get; set; }
+        [Key]
         public int Id { get; set; }
         public string Vorname { get; set; }
-        public DateTime Geburtstag { get; set; }
+        public DateTime Geburtsdatum { get; set; }
 
         public ICollection<Reservation> Reservationen { get; set; }
 
