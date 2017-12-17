@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AutoReservationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="AutoReservationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/AutoReservation.Common.DataTransferObjects" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAutoReservationService_getAllCars_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllCars" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getAllCars_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllCarsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getAllCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getAllCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getAllReservations_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllReservations" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getAllReservations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllReservationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getCarById_InputMessage">
+    <wsdl:part name="parameters" element="tns:getCarById" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getCarById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getCarByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getCustomerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:getCustomerById" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getCustomerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getCustomerByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getReservationByNr_InputMessage">
+    <wsdl:part name="parameters" element="tns:getReservationByNr" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_getReservationByNr_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getReservationByNrResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addCar_InputMessage">
+    <wsdl:part name="parameters" element="tns:addCar" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addCar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addCarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:addCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addRerservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:addRerservation" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_addRerservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addRerservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyCar_InputMessage">
+    <wsdl:part name="parameters" element="tns:modifyCar" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyCar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:modifyCarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:modifyCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:modifyCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyRerservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:modifyRerservation" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_modifyRerservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:modifyRerservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeCar_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeCar" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeCar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeCarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeRerservation_InputMessage">
+    <wsdl:part name="parameters" element="tns:removeRerservation" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_removeRerservation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:removeRerservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_isCarAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:isCarAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IAutoReservationService_isCarAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isCarAvailableResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAutoReservationService">
+    <wsdl:operation name="getAllCars">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getAllCars" message="tns:IAutoReservationService_getAllCars_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getAllCarsResponse" message="tns:IAutoReservationService_getAllCars_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getAllCustomers" message="tns:IAutoReservationService_getAllCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getAllCustomersResponse" message="tns:IAutoReservationService_getAllCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllReservations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getAllReservations" message="tns:IAutoReservationService_getAllReservations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getAllReservationsResponse" message="tns:IAutoReservationService_getAllReservations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getCarById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getCarById" message="tns:IAutoReservationService_getCarById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getCarByIdResponse" message="tns:IAutoReservationService_getCarById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getCustomerById" message="tns:IAutoReservationService_getCustomerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getCustomerByIdResponse" message="tns:IAutoReservationService_getCustomerById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getReservationByNr">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/getReservationByNr" message="tns:IAutoReservationService_getReservationByNr_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/getReservationByNrResponse" message="tns:IAutoReservationService_getReservationByNr_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addCar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/addCar" message="tns:IAutoReservationService_addCar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/addCarResponse" message="tns:IAutoReservationService_addCar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/addCustomer" message="tns:IAutoReservationService_addCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/addCustomerResponse" message="tns:IAutoReservationService_addCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addRerservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/addRerservation" message="tns:IAutoReservationService_addRerservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/addRerservationResponse" message="tns:IAutoReservationService_addRerservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="modifyCar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/modifyCar" message="tns:IAutoReservationService_modifyCar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/modifyCarResponse" message="tns:IAutoReservationService_modifyCar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="modifyCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/modifyCustomer" message="tns:IAutoReservationService_modifyCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/modifyCustomerResponse" message="tns:IAutoReservationService_modifyCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="modifyRerservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/modifyRerservation" message="tns:IAutoReservationService_modifyRerservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/modifyRerservationResponse" message="tns:IAutoReservationService_modifyRerservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeCar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/removeCar" message="tns:IAutoReservationService_removeCar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/removeCarResponse" message="tns:IAutoReservationService_removeCar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/removeCustomer" message="tns:IAutoReservationService_removeCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/removeCustomerResponse" message="tns:IAutoReservationService_removeCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="removeRerservation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/removeRerservation" message="tns:IAutoReservationService_removeRerservation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/removeRerservationResponse" message="tns:IAutoReservationService_removeRerservation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isCarAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutoReservationService/isCarAvailable" message="tns:IAutoReservationService_isCarAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutoReservationService/isCarAvailableResponse" message="tns:IAutoReservationService_isCarAvailable_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AutoReservationService" type="tns:IAutoReservationService">
+    <wsp:PolicyReference URI="#AutoReservationService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="getAllCars">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getAllCars" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCustomers">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getAllCustomers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllReservations">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getAllReservations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCarById">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getCarById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerById">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getCustomerById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservationByNr">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/getReservationByNr" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCar">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/addCar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCustomer">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/addCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addRerservation">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/addRerservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modifyCar">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/modifyCar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modifyCustomer">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/modifyCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modifyRerservation">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/modifyRerservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeCar">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/removeCar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeCustomer">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/removeCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeRerservation">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/removeRerservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isCarAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IAutoReservationService/isCarAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AutoReservationService">
+    <wsdl:port name="AutoReservationService" binding="tns:AutoReservationService">
+      <soap12:address location="net.tcp://localhost:7876/AutoReservationService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7876/AutoReservationService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-B62SRSM\pascal</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

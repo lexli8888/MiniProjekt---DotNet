@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/AutoReservation.Common.DataTransferObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/AutoReservation.Common.DataTransferObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfAutoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AutoDto" nillable="true" type="tns:AutoDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAutoDto" nillable="true" type="tns:ArrayOfAutoDto" />
+  <xs:complexType name="AutoDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AutoKlasse" type="tns:AutoKlasse" />
+      <xs:element minOccurs="0" name="Basistarif" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Marke" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowVersion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Tagestarif" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AutoDto" nillable="true" type="tns:AutoDto" />
+  <xs:simpleType name="AutoKlasse">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Luxusklasse" />
+      <xs:enumeration value="Mittelklasse" />
+      <xs:enumeration value="Standard" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AutoKlasse" nillable="true" type="tns:AutoKlasse" />
+  <xs:complexType name="ArrayOfKundeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KundeDto" nillable="true" type="tns:KundeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKundeDto" nillable="true" type="tns:ArrayOfKundeDto" />
+  <xs:complexType name="KundeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Geburtsdatum" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Nachname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowVersion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Vorname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KundeDto" nillable="true" type="tns:KundeDto" />
+  <xs:complexType name="ArrayOfReservationDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReservationDto" nillable="true" type="tns:ReservationDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReservationDto" nillable="true" type="tns:ArrayOfReservationDto" />
+  <xs:complexType name="ReservationDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Auto" nillable="true" type="tns:AutoDto" />
+      <xs:element minOccurs="0" name="Bis" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Kunde" nillable="true" type="tns:KundeDto" />
+      <xs:element minOccurs="0" name="ReservationsNr" type="xs:int" />
+      <xs:element minOccurs="0" name="RowVersion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Von" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReservationDto" nillable="true" type="tns:ReservationDto" />
+</xs:schema>
