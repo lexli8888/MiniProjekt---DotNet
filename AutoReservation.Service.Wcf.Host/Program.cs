@@ -1,6 +1,8 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
 using System;
 using System.ServiceModel;
+using System.Threading;
+using System.Windows;
 
 namespace AutoReservation.Service.Wcf.Host
 {
@@ -15,19 +17,19 @@ namespace AutoReservation.Service.Wcf.Host
 
             // Open ServiceHost
             host.Open();
-            
 
             Console.WriteLine("AutoReservationService started.");
             Console.WriteLine();
             Console.WriteLine("Press Return to stop the Service.");
-
+            
             Console.ReadLine();
-
+            
             // Stop ServiceHost
             if (host.State != CommunicationState.Closed)
             {
                 host.Close();
             }
         }
+       
     }
 }

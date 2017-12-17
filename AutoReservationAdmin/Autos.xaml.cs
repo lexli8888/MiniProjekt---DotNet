@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AutoReservation.Common.DataTransferObjects;
+using System.Collections.ObjectModel;
 
 namespace AutoReservationAdmin
 {
@@ -19,6 +21,8 @@ namespace AutoReservationAdmin
     /// </summary>
     public partial class Autos : Window
     {
+
+        public ObservableCollection<AutoDto> AutoCollection { get; set; }
         public Autos()
         {
             InitializeComponent();

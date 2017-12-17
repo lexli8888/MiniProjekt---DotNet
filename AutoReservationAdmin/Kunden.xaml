@@ -25,6 +25,20 @@
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_ModifyCustomer">Modify Customer</Button>
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_DeleteCustomer">Delete Customer</Button>
         </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="3"></ListBox>
+        <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding KundeCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="local:AutoDto">
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0} {1} {2}">
+                                <Binding Path="Vorname"></Binding>
+                                <Binding Path="Nachname"></Binding>
+                                <Binding Path="Geburtsdatum"></Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

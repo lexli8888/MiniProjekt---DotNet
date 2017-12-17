@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoReservation.Common.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,11 @@ namespace AutoReservationAdmin
             Window Autos = new Autos();
             Autos.Show();
             this.Close();
+        }
+
+        private void Button_AddCar(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

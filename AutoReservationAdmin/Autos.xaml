@@ -25,6 +25,20 @@
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_ModifyCar">Modify Car</Button>
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_DeleteCar">Delete Car</Button>
         </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="3"></ListBox>
+        <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding AutoCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="local:AutoDto">
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0}">
+                                <Binding Path="Marke"></Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
     </Grid>
 </Window>

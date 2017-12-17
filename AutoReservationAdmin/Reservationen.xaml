@@ -25,6 +25,22 @@
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_ModifyReservation">Modify Reservation</Button>
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_DeleteReservation">Delete Reservation</Button>
         </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="3"></ListBox>
+        <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding ReservationCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="local:AutoDto">
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0} {1} {2} {3} {4}">
+                                <Binding Path="ReservationsNr"></Binding>
+                                <Binding Path="Von"></Binding>
+                                <Binding Path="Bis"></Binding>
+                                <Binding Path="Auto"></Binding>
+                                <Binding Path="Kunde"></Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
