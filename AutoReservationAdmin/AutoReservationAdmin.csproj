@@ -65,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AutoController.cs" />
     <Compile Include="KundeHinzufügen.xaml.cs">
       <DependentUpon>KundeHinzufügen.xaml</DependentUpon>
     </Compile>
@@ -74,6 +75,8 @@
     <Compile Include="ReservationHinzufügen.xaml.cs">
       <DependentUpon>ReservationHinzufügen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AutoHinzufügenViewModel.cs" />
+    <Compile Include="ViewModels\AutoViewModel.cs" />
     <Page Include="AutoHinzufügen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

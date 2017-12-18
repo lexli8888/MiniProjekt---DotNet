@@ -1,4 +1,5 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
+using AutoReservationAdmin.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,21 @@ namespace AutoReservationAdmin
     /// </summary>
     public partial class AutoHinzufügen : Window
     {
-        public AutoHinzufügen()
+        private AutoController controller = new AutoController();
+
+        public AutoHinzufügen(AutoDto auto)
         {
             InitializeComponent();
+
+            if (auto == null)
+            {
+                DataContext = controller.GenerateCreateAutoHinzufügenViewModel();
+            }
+            else
+            {
+                DataContext = controller.GenerateModifyAutoHinzufügenViewModel(auto);
+            }
+            
         }
 
         

@@ -11,6 +11,7 @@ namespace AutoReservation.Dal.Entities
         public DateTime RowVersion;
 
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Marke { get; set; }
         public int Tagestarif { get; set; }

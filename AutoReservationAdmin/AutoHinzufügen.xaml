@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoReservationAdmin"
+        xmlns:model="clr-namespace:AutoReservationAdmin.ViewModels"
         mc:Ignorable="d"
         Title="AutoHinzufügen" Height="500" Width="750">
+    <Window.DataContext>
+        <model:AutoHinzufügenViewModel></model:AutoHinzufügenViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
@@ -23,7 +27,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Marke"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Marke" Text="{Binding Marke}"></TextBox>
         <TextBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Tagestarif"></TextBox>
         <TextBox Grid.Column="3" Grid.Row="3" Margin="25" Name="Basistarif"></TextBox>
         <ComboBox Grid.Column="3" Grid.Row="4" Margin="25" Name="Autoklasse"></ComboBox>
@@ -32,7 +36,7 @@
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Basistarif:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" FontSize="20">Autoklasse:</TextBlock>
         <Button Grid.Column="1" Grid.Row="5" Margin="25" FontSize="20" Click="Button_Back">Zurück zur Übersicht</Button>
-        <Button Grid.Column="3" Grid.Row="5" Margin="25" FontSize="20" Click="Button_AddCar">Auto Hinzufügen</Button>
+        <Button Grid.Column="3" Grid.Row="5" Margin="25" FontSize="20" Click="Button_AddCar" Content="{Binding SaveText}"></Button>
 
     </Grid>
 </Window>

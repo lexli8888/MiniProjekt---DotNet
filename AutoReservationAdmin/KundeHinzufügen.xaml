@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoReservationAdmin"
+        xmlns:model="clr-namespace:AutoReservationAdmin.ViewModels"
         mc:Ignorable="d"
         Title="KundeHinzufügen" Height="500" Width="750">
     <Grid>

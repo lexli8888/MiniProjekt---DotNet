@@ -42,6 +42,8 @@ namespace AutoReservation.Dal
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Auto>()
+                .Property(p => p.RowVersion).IsConcurrencyToken();
             // Set up hierarchical mapping in fluent API
             //      Remarks:
             //      This could not be done using attributes on business entities

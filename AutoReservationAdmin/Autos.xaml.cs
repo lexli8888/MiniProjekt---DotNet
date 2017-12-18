@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AutoReservation.Common.DataTransferObjects;
 using System.Collections.ObjectModel;
+using AutoReservationAdmin.AutoReservationService;
+using AutoReservationAdmin.ViewModels;
+using AutoReservationAdmin.Controllers;
 
 namespace AutoReservationAdmin
 {
@@ -21,23 +24,29 @@ namespace AutoReservationAdmin
     /// </summary>
     public partial class Autos : Window
     {
+        private AutoController controller;
 
-        public ObservableCollection<AutoDto> AutoCollection { get; set; }
         public Autos()
         {
             InitializeComponent();
+
+            controller = new AutoController();
+            DataContext = controller.GenerateAutosViewModel();
         }
 
         private void Button_AddCar(object sender, RoutedEventArgs e)
         {
-            Window AddCar = new AutoHinzufügen();
+            Window AddCar = new AutoHinzufügen(null);
             AddCar.Show();
             this.Close();
         }
 
         private void Button_ModifyCar(object sender, RoutedEventArgs e)
         {
-
+            var viewModel = (AutoViewModel)DataContext;
+            Window AddCar = new AutoHinzufügen(viewModel.SelectedAuto);
+            AddCar.Show();
+            this.Close();
         }
 
         private void Button_DeleteCar(object sender, RoutedEventArgs e)
