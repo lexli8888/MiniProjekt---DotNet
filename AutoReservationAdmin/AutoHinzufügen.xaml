@@ -28,9 +28,9 @@
             <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Marke" Text="{Binding Marke}"></TextBox>
-        <TextBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Tagestarif"></TextBox>
-        <TextBox Grid.Column="3" Grid.Row="3" Margin="25" Name="Basistarif"></TextBox>
-        <ComboBox Grid.Column="3" Grid.Row="4" Margin="25" Name="Autoklasse"></ComboBox>
+        <TextBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Tagestarif" Text="{Binding Tagestarif}"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="3" Margin="25" Name="Basistarif" Text="{Binding Basistarif}"></TextBox>
+        <ComboBox Grid.Column="3" Grid.Row="4" Margin="25" Name="Autoklasse" ></ComboBox>
         <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="20">Marke:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="20">Tagestarif:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Basistarif:</TextBlock>

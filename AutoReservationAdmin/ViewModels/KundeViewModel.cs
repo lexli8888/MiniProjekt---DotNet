@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoReservationAdmin.ViewModels
 {
-    public class KundeViewModel
+    public class ReservationViewModel
     {
         public ObservableCollection<KundeDto> KundeCollection { get; set; }
         public KundeDto SelectedKunde { get; set; }

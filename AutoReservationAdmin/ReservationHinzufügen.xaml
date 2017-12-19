@@ -23,16 +23,16 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="3" Grid.Row="3" Margin="25"></TextBox>
-        <TextBox Grid.Column="3" Grid.Row="4" Margin="25"></TextBox>
-        <ComboBox Grid.Column="3" Grid.Row="1" Margin="25"></ComboBox>
-        <ComboBox Grid.Column="3" Grid.Row="2" Margin="25"></ComboBox>
+        <TextBox Grid.Column="3" Grid.Row="3" Margin="25" Name="Von"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="4" Margin="25" Name="Bis"></TextBox>
+        <ComboBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Kunde"></ComboBox>
+        <ComboBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Auto"></ComboBox>
         <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="20">Kunde:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="20">Auto:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Datum von:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" FontSize="20">Datum bis:</TextBlock>
         <Button Grid.Column="1" Grid.Row="5" Margin="25" FontSize="20" Click="Button_Back">Zurück zur Übersicht</Button>
-        <Button Grid.Column="3" Grid.Row="5" Margin="25" FontSize="20">Reservation Hinzufügen</Button>
+        <Button Grid.Column="3" Grid.Row="5" Margin="25" FontSize="20" Click="Button_AddReservation" Content="{Binding SaveText}"></Button>
 
     </Grid>
 </Window>

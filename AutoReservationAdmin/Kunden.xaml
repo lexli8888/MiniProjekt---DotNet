@@ -25,7 +25,7 @@
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_ModifyCustomer">Modify Customer</Button>
             <Button Width="100" Height="30" Margin="75,0,0,0" Click="Button_DeleteCustomer">Delete Customer</Button>
         </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding KundeCollection}">
+        <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding KundeCollection}" SelectedItem="{Binding SelectedKunde}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="local:AutoDto">
                     <TextBlock>

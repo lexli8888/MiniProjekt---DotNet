@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using AutoReservation.Common.DataTransferObjects;
+
 namespace AutoReservationAdmin.AutoReservationService {
     
     
@@ -265,6 +268,11 @@ namespace AutoReservationAdmin.AutoReservationService {
         
         public System.Threading.Tasks.Task<bool> isCarAvailableAsync(AutoReservation.Common.DataTransferObjects.ReservationDto reservation, AutoReservation.Common.DataTransferObjects.AutoDto auto) {
             return base.Channel.isCarAvailableAsync(reservation, auto);
+        }
+
+        internal ReservationDto getCustomerById(object id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

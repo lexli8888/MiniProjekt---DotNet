@@ -51,7 +51,10 @@ namespace AutoReservationAdmin
 
         private void Button_DeleteCar(object sender, RoutedEventArgs e)
         {
-
+            var viewModel = (AutoViewModel)DataContext;
+            var client = new AutoReservationServiceClient();
+            AutoDto selectedAuto = client.getCarById(viewModel.SelectedAuto.Id);
+            client.removeCar(selectedAuto);
         }
     }
 }

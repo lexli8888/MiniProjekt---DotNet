@@ -35,7 +35,12 @@ namespace AutoReservationAdmin.Controllers
             return new AutoHinzufügenViewModel
             {
                 IsNew = false,
-                Marke = auto.Marke
+                Id = auto.Id,
+                Marke = auto.Marke,
+                Basistarif = auto.Basistarif,
+                Tagestarif = auto.Tagestarif,
+                AutoKlasse = auto.AutoKlasse
+                
             };
         }
     }

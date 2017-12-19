@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AutoReservation.Common.DataTransferObjects;
 using System.Collections.ObjectModel;
+using AutoReservationAdmin.AutoReservationService;
+using AutoReservationAdmin.ViewModels;
+using AutoReservationAdmin.Controllers;
 
 namespace AutoReservationAdmin
 {
@@ -21,28 +24,37 @@ namespace AutoReservationAdmin
     /// </summary>
     public partial class Kunden : Window
     {
-        public ObservableCollection<KundeDto> KundeCollection { get; set; }
+        private KundeController controller;
         
         public Kunden()
         {
             InitializeComponent();
+
+            controller = new KundeController();
+            DataContext = controller.GenerateKundeViewModel();
         }
 
         private void Button_AddCustomer(object sender, RoutedEventArgs e)
         {
-            Window AddCustomer = new KundeHinzufügen();
+            Window AddCustomer = new KundeHinzufügen(null);
             AddCustomer.Show();
             this.Close();
         }
 
         private void Button_ModifyCustomer(object sender, RoutedEventArgs e)
         {
-
+            var viewModel = (KundeViewModel)DataContext;
+            Window AddCustomer = new KundeHinzufügen(viewModel.SelectedKunde);
+            AddCustomer.Show();
+            this.Close();
         }
 
         private void Button_DeleteCustomer(object sender, RoutedEventArgs e)
         {
-
+            var viewModel = (KundeViewModel)DataContext;
+            var client = new AutoReservationServiceClient();
+            KundeDto selectedCustomer = client.getCustomerById(viewModel.SelectedKunde.Id);
+            client.removeCustomer(selectedCustomer);
         }
     }
 }
