@@ -43,17 +43,14 @@ namespace AutoReservation.BusinessLayer
                 context.Entry(auto).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException e) {
-                CreateOptimisticConcurrencyException<Auto>(context, auto);
+            catch (DbUpdateConcurrencyException) {
+                throw CreateOptimisticConcurrencyException<Auto>(context, auto);
             }
         }
 
        
 
-        public AutoUnavailableException<Auto> CreateAutoUnavailableException(Reservation reservation, Auto auto)
-        {
-            return new AutoUnavailableException<Auto>("Das Auto ist für diesen Zeitraum nicht verfügbar.");
-        }
+        
 
 
 

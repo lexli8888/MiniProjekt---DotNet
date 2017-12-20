@@ -7,7 +7,7 @@ namespace AutoReservation.Dal.Entities
     public class Reservation
     {
         public DateTime RowVersion;
-        
+
         public int AutoId { get; set; }
         public int KundeId { get; set; }
         public DateTime Von { get; set; }
@@ -15,8 +15,9 @@ namespace AutoReservation.Dal.Entities
 
         [Key]
         public int ReservationsNr { get; set; }
-
+        [ForeignKey(nameof(AutoId))]
         public Auto Auto { get; set; }
+        [ForeignKey(nameof(KundeId))]
         public Kunde Kunde { get; set; }
     }
 }

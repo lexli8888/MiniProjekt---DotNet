@@ -21,31 +21,67 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void ScenarioOkay01Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            
+            Assert.IsTrue(
+                Target.dateRangeCheck(new Reservation
+                {
+                    Von = new DateTime(2017, 1, 1),
+                    Bis = new DateTime(2017, 7, 1)
+
+                })
+                );
         }
 
         [TestMethod]
         public void ScenarioOkay02Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsTrue(
+                Target.dateRangeCheck(new Reservation
+                {
+                    Von = new DateTime(2017, 8, 23),
+                    Bis = new DateTime(2017, 9, 4)
+
+                })
+                );
         }
 
         [TestMethod]
         public void ScenarioNotOkay01Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsFalse(
+                Target.dateRangeCheck(new Reservation
+                {
+                    Von = new DateTime(2017, 7, 1),
+                    Bis = new DateTime(2017, 6, 1)
+
+                })
+                );
         }
 
         [TestMethod]
         public void ScenarioNotOkay02Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsFalse(
+                Target.dateRangeCheck(new Reservation
+                {
+                    Von = new DateTime(2017, 7, 1),
+                    Bis = new DateTime(2017, 7, 1)
+
+                })
+                );
         }
 
         [TestMethod]
         public void ScenarioNotOkay03Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsFalse(
+                Target.dateRangeCheck(new Reservation
+                {
+                    Von = new DateTime(2017, 5, 1),
+                    Bis = new DateTime(2016, 6, 1)
+
+                })
+                );
         }
     }
 }

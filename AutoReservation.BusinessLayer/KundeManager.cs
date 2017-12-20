@@ -47,9 +47,9 @@ namespace AutoReservation.BusinessLayer
                 context.Entry(kunde).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (DbUpdateConcurrencyException)
             {
-                CreateOptimisticConcurrencyException<Kunde>(context, kunde);
+                throw CreateOptimisticConcurrencyException<Kunde>(context, kunde);
             }
         }
     }

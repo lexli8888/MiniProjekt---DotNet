@@ -77,6 +77,9 @@
     </Compile>
     <Compile Include="DataTransferObjects\AutoDto.cs" />
     <Compile Include="DataTransferObjects\AutoKlasse.cs" />
+    <Compile Include="DataTransferObjects\Faults\AutoUnavailable.cs" />
+    <Compile Include="DataTransferObjects\Faults\InvalidDateRange.cs" />
+    <Compile Include="DataTransferObjects\Faults\OptimisticConcurrency.cs" />
     <Compile Include="DataTransferObjects\KundeDto.cs" />
     <Compile Include="DataTransferObjects\ReservationDto.cs" />
     <Compile Include="Interfaces\IAutoReservationService.cs" />
@@ -91,9 +94,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataTransferObjects\Faults\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AutoReservation.Dal\AutoReservation.Dal.csproj">
       <Project>{ab98ac63-032f-4050-9755-1e2235e9f1dd}</Project>

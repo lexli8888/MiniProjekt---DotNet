@@ -32,8 +32,20 @@ namespace AutoReservation.BusinessLayer
 
         public void addReservation (Reservation reservation)
         {
-            context.Entry(reservation).State = EntityState.Added;
-            context.SaveChanges();
+            if (dateRangeCheck(reservation))
+            {
+                if (IsCarAvailable(reservation, reservation.Auto))
+                {
+                    context.Entry(reservation).State = EntityState.Added;
+                    context.SaveChanges();
+                }
+                else {
+                    throw CreateAutoUnavailableException(reservation, reservation.Auto);
+                }
+            }
+            else {
+                throw CreateInvalidDateRangeException(reservation);
+            }
         }
 
         public void removeReservation (Reservation reservation)
@@ -48,24 +60,26 @@ namespace AutoReservation.BusinessLayer
                 context.Entry(reservation).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (DbUpdateConcurrencyException)
             {
-                CreateOptimisticConcurrencyException<Reservation>(context, reservation);
+                throw CreateOptimisticConcurrencyException<Reservation>(context, reservation);
             }
         }
 
         // need to edit Check for 24 hours difference
         public bool dateRangeCheck(Reservation reservation) {
             if (reservation.Bis > reservation.Von) {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public bool IsCarAvailable(Reservation reservation, Auto auto)
         {
-            // check if Reservation is not equal with auto range
-            return context.Reservations.Where(x => x.Auto == auto && x.Bis < reservation.Von && x.Von < reservation.Bis) == null ? false : true;
+            Auto test = auto;
+            return context.Reservations.Where(x => x.Auto == auto 
+            && x.Von < reservation.Von 
+            && reservation.Von < x.Bis) == null ? false : true;
             
         }
 
@@ -74,5 +88,12 @@ namespace AutoReservation.BusinessLayer
         {
             return new InvalidDateRangeException<Reservation>($"Update Timerange of: " + reservation.ToString() +" Eine Reservation muss länger als 24 Stunden dauern!");
         }
+
+        public static AutoUnavailableException<Auto> CreateAutoUnavailableException(Reservation reservation, Auto auto)
+        {
+            return new AutoUnavailableException<Auto>("Das Auto ist für diesen Zeitraum nicht verfügbar.");
+        }
+
+        
     }
 }

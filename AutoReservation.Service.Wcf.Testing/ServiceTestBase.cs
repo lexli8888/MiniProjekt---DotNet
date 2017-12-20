@@ -1,9 +1,13 @@
-﻿using AutoReservation.Common.DataTransferObjects;
+﻿
+using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.DataTransferObjects.Faults;
 using AutoReservation.Common.Interfaces;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.ServiceModel;
 
@@ -124,8 +128,8 @@ namespace AutoReservation.Service.Wcf.Testing
             {
                 Von = new DateTime(2017, 12, 24),
                 Bis = new DateTime(2017, 12, 31),
-                Auto = new AutoDto { },
-                Kunde = new KundeDto { }
+                Auto = service.getCarById(1),
+                Kunde = service.getCustomerById(1)
             });
             Assert.IsNotNull(service.getReservationByNr(4));
         }
@@ -153,9 +157,9 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void DeleteReservationTest()
         {
-            ReservationDto testReservation = service.getReservationByNr(1);
+            ReservationDto testReservation = service.getReservationByNr(2);
             service.removeRerservation(testReservation);
-            Assert.IsNull(service.getReservationByNr(1));
+            Assert.IsNull(service.getReservationByNr(2));
         }
 
         #endregion
@@ -183,10 +187,10 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void UpdateReservationTest()
         {
-            ReservationDto testReseration = service.getReservationByNr(1);
-            testReseration.Bis = new DateTime(2020, 1, 31);
-            service.modifyRerservation(testReseration);
-            Assert.AreEqual(new DateTime(2020, 1, 31), service.getReservationByNr(1).Bis);
+            ReservationDto testReservation = service.getReservationByNr(1);
+            testReservation.Bis = new DateTime(2020, 1, 31);
+            service.modifyRerservation(testReservation);
+            Assert.AreEqual(service.getReservationByNr(1).Bis, new DateTime(2020, 1, 31));
         }
 
         #endregion
@@ -194,21 +198,39 @@ namespace AutoReservation.Service.Wcf.Testing
         #region Update with optimistic concurrency violation
 
         [TestMethod]
+        [ExpectedException(typeof(FaultException<OptimisticConcurrency<AutoDto>>))]
         public void UpdateAutoWithOptimisticConcurrencyTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            AutoDto testAuto1 = service.getCarById(1);
+            AutoDto testAuto2 = service.getCarById(1);
+            testAuto1.Marke = "Porsche";
+            testAuto2.Marke = "Maserati";
+            service.modifyCar(testAuto1);
+            service.modifyCar(testAuto1);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FaultException<OptimisticConcurrency<KundeDto>>))]
         public void UpdateKundeWithOptimisticConcurrencyTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            KundeDto testKunde1 = service.getCustomerById(1);
+            KundeDto testKunde2 = service.getCustomerById(1);
+            testKunde1.Nachname = "Johnson";
+            testKunde2.Nachname = "Graham";
+            service.modifyCustomer(testKunde1);
+            service.modifyCustomer(testKunde2);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FaultException<OptimisticConcurrency<ReservationDto>>))]
         public void UpdateReservationWithOptimisticConcurrencyTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            ReservationDto testReservation1 = service.getReservationByNr(1);
+            ReservationDto testReservation2 = service.getReservationByNr(1);
+            testReservation1.Kunde = service.getCustomerById(1);
+            testReservation2.Kunde = service.getCustomerById(2);
+            service.modifyRerservation(testReservation1);
+            service.modifyRerservation(testReservation2);
         }
 
         #endregion
@@ -216,27 +238,46 @@ namespace AutoReservation.Service.Wcf.Testing
         #region Insert / update invalid time range
 
         [TestMethod]
+        [ExpectedException (typeof(FaultException<InvalidDateRange>))]
         public void InsertReservationWithInvalidDateRangeTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+                service.addRerservation(
+                    new ReservationDto {
+                        Von = new DateTime(2017, 1, 1),
+                        Bis = new DateTime(2016, 12, 31),
+                        Auto = service.getCarById(2),
+                        Kunde = service.getCustomerById(1) });
+           
         }
 
         [TestMethod]
         public void InsertReservationWithAutoNotAvailableTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            service.addRerservation(new ReservationDto
+            {
+                Von = new DateTime(2020, 1, 12),
+                Bis = new DateTime(2020, 1, 15),
+                Kunde = service.getCustomerById(1),
+                Auto = service.getCarById(1)
+            });
         }
 
         [TestMethod]
+        [ExpectedException (typeof (FaultException<InvalidDateRange>))]
         public void UpdateReservationWithInvalidDateRangeTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            ReservationDto testReservation = service.getReservationByNr(1);
+            testReservation.Bis = new DateTime(2017, 1, 1);
+            service.modifyRerservation(testReservation);
         }
 
         [TestMethod]
+        [ExpectedException (typeof(FaultException<AutoUnavailable>))]
         public void UpdateReservationWithAutoNotAvailableTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            ReservationDto testReservation = service.getReservationByNr(1);
+            testReservation.Auto = service.getCarById(2);
+            service.modifyRerservation(testReservation);
         }
 
         #endregion
@@ -246,13 +287,26 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void CheckAvailabilityIsTrueTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.IsTrue(service.isCarAvailable(new ReservationDto
+            {
+                Von = new DateTime(2021, 1, 12),
+                Bis = new DateTime(2021, 1, 15),
+                Kunde = service.getCustomerById(1),
+                Auto = service.getCarById(1)
+            }, service.getCarById(1)));
         }
 
         [TestMethod]
+        [ExpectedException (typeof(FaultException<AutoUnavailable>))]
         public void CheckAvailabilityIsFalseTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            service.addRerservation(new ReservationDto
+            {
+                Von = new DateTime(2020, 1, 12),
+                Bis = new DateTime(2020, 1, 15),
+                Kunde = service.getCustomerById(1),
+                Auto = service.getCarById(1)
+            });
         }
 
         #endregion

@@ -5,6 +5,9 @@ using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
 using AutoReservation.Dal.Entities;
 using AutoReservation.BusinessLayer;
+using AutoReservation.BusinessLayer.Exceptions;
+using AutoReservation.Common.DataTransferObjects.Faults;
+using System.ServiceModel;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -35,7 +38,28 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             Reservation reservation = DtoConverter.ConvertToEntity(reservationDto);
             ReservationManager reservationManager = new ReservationManager();
-            reservationManager.addReservation(reservation);
+            try
+            {
+                reservationManager.addReservation(reservation);
+            }
+            catch (InvalidDateRangeException<Reservation> e)
+            {
+                InvalidDateRange fault = new InvalidDateRange();
+                fault.Result = false;
+                fault.Message = e.Message;
+                fault.Description = "Ungültiger Zeitraum gewählt!";
+
+                throw new FaultException<InvalidDateRange>(fault);
+            }
+
+            catch (AutoUnavailableException<Auto> e) {
+                AutoUnavailable fault = new AutoUnavailable();
+                fault.Result = false;
+                fault.Message = e.Message;
+                fault.Description = "Car is not available";
+
+                throw new FaultException<AutoUnavailable>(fault);
+            }
         }
 
         public List<AutoDto> getAllCars()
@@ -93,7 +117,19 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             Auto auto = DtoConverter.ConvertToEntity(autoDto);
             AutoManager autoManager = new AutoManager();
-            autoManager.modifyCar(auto);
+            try
+            {
+                autoManager.modifyCar(auto);
+            }
+            catch (OptimisticConcurrencyException<Auto> e) {
+                OptimisticConcurrency<AutoDto> fault = new OptimisticConcurrency<AutoDto>();
+                fault.Result = false;
+                fault.Message = e.Message;
+                fault.Description = "Occurrency Exception!";
+
+                throw new FaultException<OptimisticConcurrency<AutoDto>>(fault);
+            }
+            
         }
 
         public void modifyCustomer(KundeDto kundeDto)
@@ -101,7 +137,19 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             Kunde kunde = DtoConverter.ConvertToEntity(kundeDto);
             KundeManager kundeManager = new KundeManager();
-            kundeManager.modifyCustomer(kunde);
+
+            try {
+                kundeManager.modifyCustomer(kunde);
+            }
+            catch (OptimisticConcurrencyException<Kunde> e)
+            {
+                OptimisticConcurrency<KundeDto> fault = new OptimisticConcurrency<KundeDto>();
+                fault.Result = false;
+                fault.Message = e.Message;
+                fault.Description = "Occurrency Exception!";
+
+                throw new FaultException<OptimisticConcurrency<KundeDto>>(fault);
+            }
         }
 
         public void modifyRerservation(ReservationDto reservationDto)
@@ -109,7 +157,20 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             Reservation reservation = DtoConverter.ConvertToEntity(reservationDto);
             ReservationManager reservationManager = new ReservationManager();
-            reservationManager.modifyReservation(reservation);
+
+            try {
+                reservationManager.modifyReservation(reservation);
+            }
+            
+            catch (OptimisticConcurrencyException<Reservation> e)
+            {
+                OptimisticConcurrency<ReservationDto> fault = new OptimisticConcurrency<ReservationDto>();
+                fault.Result = false;
+                fault.Message = e.Message;
+                fault.Description = "Occurrency Exception!";
+
+                throw new FaultException<OptimisticConcurrency<ReservationDto>>(fault);
+            }
         }
 
         public void removeCar(AutoDto autoDto)
