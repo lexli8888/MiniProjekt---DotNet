@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AutoReservationAdmin"
+        xmlns:model="clr-namespace:AutoReservationAdmin.ViewModels"
         mc:Ignorable="d"
         Title="ReservationHinzufügen" Height="500" Width="750">
+    <Window.DataContext>
+        <model:ReservationHinzufügenViewModel></model:ReservationHinzufügenViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
@@ -23,10 +26,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="3" Grid.Row="3" Margin="25" Name="Von"></TextBox>
-        <TextBox Grid.Column="3" Grid.Row="4" Margin="25" Name="Bis"></TextBox>
-        <ComboBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Kunde"></ComboBox>
-        <ComboBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Auto"></ComboBox>
+        <DatePicker Grid.Column="3" Grid.Row="3" Margin="25" Name="Von" SelectedDate="{Binding Von}"></DatePicker>
+        <DatePicker Grid.Column="3" Grid.Row="4" Margin="25" Name="Bis" SelectedDate="{Binding Bis}"></DatePicker>
+        <ComboBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Kunde" SelectedItem="{Binding Kunde}" ItemsSource="{Binding AvailableCustomers}"></ComboBox>
+        <ComboBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Auto" SelectedItem="{Binding Auto}" ItemsSource="{Binding AvailableCars}"></ComboBox>
         <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="20">Kunde:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="20">Auto:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Datum von:</TextBlock>

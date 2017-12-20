@@ -54,28 +54,7 @@ namespace AutoReservationAdmin
         {
             var client = new AutoReservationServiceClient();
             var myCar = (AutoHinzufügenViewModel)DataContext;
-            if (myCar.IsNew)
-            {
-                
-                client.addCar(new AutoDto
-                {
-                    Marke = Marke.Text,
-                    Basistarif = int.Parse(Basistarif.Text),
-                    Tagestarif = int.Parse(Tagestarif.Text),
-
-
-                });
-            }
-            else {
-
-                AutoDto selectedCar = client.getCarById(myCar.Id);
-                selectedCar.Marke = Marke.Text;
-                selectedCar.Basistarif = int.Parse(Basistarif.Text);
-                selectedCar.Tagestarif = int.Parse(Tagestarif.Text);
-                client.modifyCar(selectedCar);
-                
-            }
-
+            controller.CreateAuto(myCar);
             Window Autos = new Autos();
             Autos.Show();
             this.Close();

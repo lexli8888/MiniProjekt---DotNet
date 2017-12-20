@@ -12,9 +12,11 @@ namespace AutoReservationAdmin.Controllers
 {
     public class AutoController
     {
+        private AutoReservationServiceClient client = new AutoReservationServiceClient();
+
+
         public AutoViewModel GenerateAutosViewModel()
         {
-            var client = new AutoReservationServiceClient();
             var cars = client.getAllCars();
 
             return new AutoViewModel
@@ -27,7 +29,8 @@ namespace AutoReservationAdmin.Controllers
             return new AutoHinzufügenViewModel
             {
                 IsNew = true,
-                Marke = ""
+                Marke = "",
+                AvailableAutoKlasses = new List<AutoKlasse> { AutoKlasse.Standard, AutoKlasse.Mittelklasse, AutoKlasse.Luxusklasse },
             };
         }
         public AutoHinzufügenViewModel GenerateModifyAutoHinzufügenViewModel(AutoDto auto)
@@ -39,9 +42,30 @@ namespace AutoReservationAdmin.Controllers
                 Marke = auto.Marke,
                 Basistarif = auto.Basistarif,
                 Tagestarif = auto.Tagestarif,
-                AutoKlasse = auto.AutoKlasse
-                
+                AutoKlasse = auto.AutoKlasse,
+                AvailableAutoKlasses = new List<AutoKlasse> { AutoKlasse.Standard, AutoKlasse.Mittelklasse, AutoKlasse.Luxusklasse },
             };
+        }
+
+        public void CreateAuto(AutoHinzufügenViewModel viewModel)
+        {
+            if (viewModel.IsNew)
+            {
+                client.addCar(new AutoDto
+                {
+                    Marke = viewModel.Marke,
+                    Basistarif = viewModel.Basistarif,
+                    Tagestarif = viewModel.Tagestarif,
+                });
+            }
+            else
+            {
+                AutoDto selectedCar = client.getCarById(viewModel.Id);
+                selectedCar.Marke = viewModel.Marke;
+                selectedCar.Basistarif = viewModel.Basistarif;
+                selectedCar.Tagestarif = viewModel.Tagestarif;
+                client.modifyCar(selectedCar);
+            }
         }
     }
 }

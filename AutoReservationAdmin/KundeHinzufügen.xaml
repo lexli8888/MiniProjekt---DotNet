@@ -24,10 +24,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Vorname"></TextBox>
-        <TextBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Nachname"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="1" Margin="25" Name="Vorname" Text="{Binding Vorname}"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="2" Margin="25" Name="Nachname" Text="{Binding Nachname}"></TextBox>
 
-        <DatePicker Grid.Column="3" Grid.Row="3" Margin="25" Name="Geburtsdatum"></DatePicker>
+        <DatePicker Grid.Column="3" Grid.Row="3" Margin="25" Name="Geburtsdatum" SelectedDate="{Binding Geburtsdatum}"></DatePicker>
         <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="20">Vorname:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="20">Nachname:</TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" FontSize="20">Geburtsdatum:</TextBlock>

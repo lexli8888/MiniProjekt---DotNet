@@ -24,6 +24,7 @@ namespace AutoReservationAdmin
     public partial class KundeHinzufügen : Window
     {
         private KundeController controller = new KundeController();
+
         public KundeHinzufügen(KundeDto kunde)
         {
             InitializeComponent();
@@ -49,29 +50,7 @@ namespace AutoReservationAdmin
         {
             var client = new AutoReservationServiceClient();
             var myCustomer = (KundeHinzufügenViewModel)DataContext;
-            if (myCustomer.IsNew)
-            {
-
-                client.addCar(new KundeDto
-                {
-                    Vorname = Vorname.Text,
-                    Nachname = Nachname.Text,
-                    Geburtsdatum = Geburtsdatum.Text
-
-
-                });
-            }
-            else
-            {
-
-                KundeDto selectedCustomer = client.getCustomerById(myCustomer.Id);
-                selectedCustomer.Vorname = Vorname.Text;
-                selectedCustomer.Nachname = Nachname.Text;
-                selectedCustomer.Geburtsdatum = Geburtsdatum.Text;
-                client.modifyCustomer(selectedCustomer);
-
-            }
-
+            controller.CreateKunde(myCustomer);
             Window Kunden = new Kunden();
             Kunden.Show();
             this.Close();

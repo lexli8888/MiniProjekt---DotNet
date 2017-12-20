@@ -49,32 +49,7 @@ namespace AutoReservationAdmin
         {
             var client = new AutoReservationServiceClient();
             var myReservation = (ReservationHinzufügenViewModel)DataContext;
-            if (myReservation.IsNew)
-            {
-
-                client.addRerservation(new ReservationDto
-                {
-                    Von = Von.Text,
-                    Bis = Bis.Text,
-                    Kunde = Kunde.SelectedItem,
-                    Auto = Auto.SelectedItem
-
-                    
-
-                });
-            }
-            else
-            {
-
-                ReservationDto selectedReservation = client.getReservationByNr(myReservation.ReservationsNr);
-                selectedReservation.Von = Von.Text;
-                selectedReservation.Bis = Bis.Text;
-                selectedReservation.Kunde = Kunde.SelectedItem;
-                selectedReservation.Auto = Auto.SelectedItem;
-                client.modifyRerservation(selectedReservation);
-
-            }
-
+            controller.CreateReservation(myReservation);
             Window Reservation = new Reservationen();
             Reservation.Show();
             this.Close();

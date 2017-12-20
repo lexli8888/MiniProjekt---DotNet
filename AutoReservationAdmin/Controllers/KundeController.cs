@@ -12,9 +12,10 @@ namespace AutoReservationAdmin.Controllers
 {
     public class KundeController
     {
+        private AutoReservationServiceClient client = new AutoReservationServiceClient();
+
         public KundeViewModel GenerateKundeViewModel()
         {
-            var client = new AutoReservationServiceClient();
             var customers = client.getAllCustomers();
 
             return new KundeViewModel
@@ -41,6 +42,28 @@ namespace AutoReservationAdmin.Controllers
                 Geburtsdatum = kunde.Geburtsdatum
                 
             };
+        }
+
+        public void CreateKunde(KundeHinzufügenViewModel viewModel)
+        {
+            if (viewModel.IsNew)
+            {
+                client.addCustomer(new KundeDto
+                {
+                    Vorname = viewModel.Vorname,
+                    Nachname = viewModel.Nachname,
+                    Geburtsdatum = viewModel.Geburtsdatum
+                });
+            }
+            else
+            {
+                KundeDto selectedCustomer = client.getCustomerById(viewModel.Id);
+                selectedCustomer.Vorname = viewModel.Vorname;
+                selectedCustomer.Nachname = viewModel.Nachname;
+                selectedCustomer.Geburtsdatum = viewModel.Geburtsdatum;
+                client.modifyCustomer(selectedCustomer);
+            }
+
         }
     }
 }

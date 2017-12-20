@@ -13,9 +13,12 @@ namespace AutoReservationAdmin.ViewModels
         public int ReservationsNr { get; set; }
         public DateTime Von { get; set; }
         public DateTime Bis { get; set; }
-        public AutoDto Auto { get; set; }
 
+        public AutoDto Auto { get; set; }
         public KundeDto Kunde { get; set; }
+
+        public KundeDto[] AvailableCustomers { get; set; }
+        public AutoDto[] AvailableCars { get; set; }
 
         public string SaveText => IsNew ? "Reservation hinzufügen" : "Reservation speichern";
 

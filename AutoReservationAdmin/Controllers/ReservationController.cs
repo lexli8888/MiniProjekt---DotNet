@@ -12,9 +12,9 @@ namespace AutoReservationAdmin.Controllers
 {
     public class ReservationController
     {
+        private AutoReservationServiceClient client = new AutoReservationServiceClient();
         public ReservationViewModel GenerateReservationViewModel()
         {
-            var client = new AutoReservationServiceClient();
             var reservations = client.getAllReservations();
 
             return new ReservationViewModel
@@ -38,10 +38,33 @@ namespace AutoReservationAdmin.Controllers
                 Von = reservation.Von,
                 Bis = reservation.Bis,
                 Kunde = reservation.Kunde,
-                Auto = reservation.Auto
-
+                Auto = reservation.Auto,
+                AvailableCars = client.getAllCars(),
+                AvailableCustomers = client.getAllCustomers()
             };
         }
 
+        public void CreateReservation(ReservationHinzufügenViewModel viewModel)
+        {
+            if (viewModel.IsNew)
+            {
+                client.addRerservation(new ReservationDto
+                {
+                    Von = viewModel.Von,
+                    Bis = viewModel.Bis,
+                    Kunde = viewModel.Kunde,
+                    Auto = viewModel.Auto,
+                });
+            }
+            else
+            {
+                ReservationDto selectedReservation = client.getReservationByNr(viewModel.ReservationsNr);
+                selectedReservation.Von = selectedReservation.Von;
+                selectedReservation.Bis = selectedReservation.Bis;
+                selectedReservation.Kunde = selectedReservation.Kunde;
+                selectedReservation.Auto = selectedReservation.Auto;
+                client.modifyRerservation(selectedReservation);
+            }
+        }
     }
 }

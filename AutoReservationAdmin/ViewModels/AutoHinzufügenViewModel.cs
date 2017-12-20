@@ -16,6 +16,7 @@ namespace AutoReservationAdmin.ViewModels
         public int Tagestarif { get; set; }
         public int Basistarif { get; set; }
         public AutoKlasse AutoKlasse { get; set; }
+        public List<AutoKlasse> AvailableAutoKlasses { get; set; }
 
         public string SaveText => IsNew ? "Auto hinzufügen" : "Auto speichern";
 
